@@ -1,0 +1,14 @@
+<div class="container-fluid  ">
+    
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 justify-content-md-center">
+    <% @posts.each do |post| %>
+        
+            <div class="card m-1 p-2" style="width: 35rem;">
+                <%=link_to post.title, post_path(post.id)%>
+                <p class=""><%=post.body.truncate(50)%></p>
+            </div>
+        
+    <%end%>
+        </div> 
+    
+</div>

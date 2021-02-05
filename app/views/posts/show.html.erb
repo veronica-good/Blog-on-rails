@@ -1,0 +1,40 @@
+
+<div class='card m-5 p-2'>
+    <h3><%=@post.title%></h3>
+    <p> <%=@post.body%> </p>
+    <small>
+        <p>Posted <%= time_ago_in_words @post.created_at%> ago</p>
+
+    <small>
+        <%= link_to("Edit",edit_post_path(@post.id), class: 'btn btn-primary my-2')%>
+        <%= link_to("Delete",post_path(@post), method: :delete, data:{confirm: "Are you sure ?"}, class: 'btn btn-primary my-2')%>
+    </small>
+
+
+    <%# COMMENTS %>
+    <div class='shadow-sm p-3 mb-5 bg-white round'>
+        <%= form_with model: [@post, @comment], local: true do |f| %>
+            
+            <div class='form-group'>
+                <%= f.label :body %>
+                <%= f.text_area(:body, class: 'form-control', placeholder: 'Your thoughts here' )%>
+            </div>
+            <%= f.submit class: 'btn btn-primary'%>
+        <% end %>
+    </div>
+    
+    <h2> Here's what people are saying: </h2>
+    <%@comments.each do |c|%>
+        <div class="list-group m-2">
+            <li class="list-group-item list-group-item-light">
+                <p><%=c.body%></p>
+                <small>
+                    Commented <%= time_ago_in_words c.created_at%> ago.
+                    <%=link_to 'Delete', comment_path(c),
+                    method: :delete, 
+                    data: {confirm:"are you sure?"}%>
+                </small>
+            </li>
+        </div>
+    <%end%>
+</div>
