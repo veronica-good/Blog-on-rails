@@ -17,7 +17,7 @@
         <%= form_with model: [@post, @comment], local: true do |f| %>
             
             <div class='form-group'>
-                <%= f.label :body %>
+                <%= f.label :leave_a_comment %>
                 <%= f.text_area(:body, class: 'form-control', placeholder: 'Your thoughts here' )%>
             </div>
             <%= f.submit class: 'btn btn-primary'%>

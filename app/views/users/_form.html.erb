@@ -1,39 +1,40 @@
 
+<div class='shadow-sm p-3 mb-5 bg-white rounded'>
+    <%= form_with model: @user, local:true do |f|%>
+    <% if @user.errors.any? %>
+    <p>
+        <%= @user.errors.full_messages.join(', ')%>
+    </p>
+    <% end %>
+    <% if user_signed_in?%>
+        <h1> Update </h1>
+    <%else%>
+        <h1> Sign up </h1>
+    <%end%>
+    <div>
+        <%= f.label :name  %> 
+        <%= f.text_field :name  %> 
+    </div>
 
-<%= form_with model: @user, local:true do |f|%>
-<% if @user.errors.any? %>
-<p>
-    <%= @user.errors.full_messages.join(', ')%>
-</p>
-<% end %>
-<% if user_signed_in?%>
-    <h1> Update </h1>
-<%else%>
-    <h1> Sign up </h1>
-<%end%>
-<div>
-    <%= f.label :name  %> 
-    <%= f.text_field :name  %> 
-</div>
+    <div>
+        <%= f.label :email  %> 
+        <%= f.email_field :email  %> 
+    </div>
 
-<div>
-    <%= f.label :email  %> 
-    <%= f.email_field :email  %> 
-</div>
+    <% if user_signed_in?%>
+        <%= f.submit "Update profile"%>
+        <%=link_to 'Change password', user_password_path(@user.id)%>
+    <%else%>
+    <div>
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+    </div>
+    <div>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+    </div>
+    <%= f.submit "Sign up"%>
+    <%end%>
 
-<% if user_signed_in?%>
-    <%= f.submit "Update profile"%>
-    <%=link_to 'Change password', user_password_path(@user.id)%>
-<%else%>
-<div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+    <% end %>
 </div>
-<div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-</div>
-<%= f.submit "Sign up"%>
-<%end%>
-
-<% end %>
