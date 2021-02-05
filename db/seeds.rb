@@ -7,6 +7,23 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Post.delete_all
 Comment.delete_all
+User.delete_all
+
+PASSWORD='supersecret'
+super_user= User.create(
+    name: 'John',    
+    email: 'js@winterfell.gov',
+    password: PASSWORD
+ )
+10.times do
+    User.create(
+        name: Faker::Name.first_name,
+        email: Faker::Internet.email, 
+        password: PASSWORD
+    )
+end
+
+users=User.all
 
 # NUM_OF_POSTS=50
 
@@ -16,12 +33,14 @@ Comment.delete_all
             title: Faker::Lorem.sentence,
             body: Faker::Lorem.paragraph_by_chars,
             created_at: created_at,
-            updated_at: created_at
+            updated_at: created_at, 
+            user: users.sample
         )
         if p.valid?
             p.comments=rand(0..15).times.map do
                 Comment.new(
-                    body: Faker::GreekPhilosophers.quote
+                    body: Faker::GreekPhilosophers.quote,
+                    user: users.sample
                 )
             end
         end

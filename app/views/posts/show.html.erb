@@ -3,6 +3,7 @@
     <h3><%=@post.title%></h3>
     <p> <%=@post.body%> </p>
     <small>
+        <p>Created by <%= @post.user&.name%></p>
         <p>Posted <%= time_ago_in_words @post.created_at%> ago</p>
 
     <small>
@@ -29,6 +30,7 @@
             <li class="list-group-item list-group-item-light">
                 <p><%=c.body%></p>
                 <small>
+                    Created by <%= c.user&.name%>.
                     Commented <%= time_ago_in_words c.created_at%> ago.
                     <%=link_to 'Delete', comment_path(c),
                     method: :delete, 
