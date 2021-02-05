@@ -19,7 +19,8 @@ super_user= User.create(
     User.create(
         name: Faker::Name.first_name,
         email: Faker::Internet.email, 
-        password: PASSWORD
+        password: PASSWORD,
+        admin: true
     )
 end
 

@@ -13,10 +13,10 @@
         </div>
 
         <% if user_signed_in? %>  
-            <div class="nav-item">    
-                <em class="m-1">Hello, <%= current_user.name %></em>  
+            <div class="nav-item m-2">    
+                Hi, <%= link_to current_user.name, edit_user_path(current_user.id)  %>  
            </div>
-           <div class="nav-item">
+           <div class="nav-item m-2">
                 <%= link_to "Logout", session_path, method: :delete,
                 data: {confirm: 'Are you sure you want to log out?'}%>
             </div>

@@ -15,9 +15,13 @@ end
 
 def destroy    
     @comment=Comment.find params[:id]
-    @comment.destroy
-    redirect_to post_path(@comment.post), notice: 'comment Deleted!'
+    if can? :crud, @comment
+        @comment.destroy
+        edirect_to post_path(@comment.post), notice: 'comment Deleted!'
+    else
+        redirect_to root_path, alert: 'Not Authorized!'
     end
+end
 
 
 private
